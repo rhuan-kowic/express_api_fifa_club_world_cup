@@ -1,11 +1,8 @@
-import express from "express";
+import createApp from "./app";
 
-const server = express();
-const port = 3333;
+const server = createApp();
+const port = process.env.PORT;
 
-server.get("/api", (req, res) => {
-  res.send("⚽API FIFA Club World Cup");
-});
 
 server.listen(port, () => {
   console.log(

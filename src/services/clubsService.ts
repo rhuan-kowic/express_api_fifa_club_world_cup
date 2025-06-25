@@ -1,5 +1,10 @@
+import { ClubModel } from "../models/clubsModel";
 import { HttpResponse } from "../models/httpResponse";
-import { findAllClubs, findByIdClub } from "../repositories/clubsRepository";
+import {
+  findAllClubs,
+  findByIdClub,
+  insertClub,
+} from "../repositories/clubsRepository";
 import * as httpHelper from "../utils/httpHelper";
 
 export const findAllClubsService = async (): Promise<HttpResponse> => {
@@ -27,4 +32,29 @@ export const findByIdClubService = async (
   }
 
   return response;
+};
+
+export const insertClubService = async (
+  club: ClubModel
+): Promise<HttpResponse> => {
+  if (!club || Object.keys(club).length === 0) {
+    return httpHelper.badRequest("Club object is required");
+  }
+
+  const { id, name, country } = club;
+
+  if (Number.isInteger(id) || id <= 0) {
+    return httpHelper.badRequest("Invalid id");
+  }
+
+  if (typeof name !== "string" || name.length < 3) {
+    return httpHelper.badRequest("Invalid name");
+  }
+
+  if (typeof country !== "string" || country.length < 3) {
+    return httpHelper.badRequest("Invalid country");
+  }
+
+  await insertClub(club);
+  return httpHelper.created();
 };

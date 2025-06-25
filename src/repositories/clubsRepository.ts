@@ -39,3 +39,8 @@ export const findAllClubs = async (): Promise<ClubModel[]> => {
   return database;
 };
 
+export const findByIdClub = async (
+  id: number
+): Promise<ClubModel | undefined> => {
+  return database.find((player) => player.id === id);
+};

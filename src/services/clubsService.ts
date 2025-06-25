@@ -1,13 +1,15 @@
+import { HttpResponse } from "../models/httpResponse";
 import { findAllClubs } from "../repositories/clubsRepository";
+import * as httpHelper from "../utils/httpHelper";
 
-export const findAllClubsService = async () => {
+export const findAllClubsService = async (): Promise<HttpResponse> => {
   const data = await findAllClubs();
   let response = null;
 
-  if (!data) {
-    response = { statusCode: 204, message: "Not a club found." };
+  if (!data || data.length === 0) {
+    response = await httpHelper.noContent();
   } else {
-    response = { statusCode: 200, message: data };
+    response = await httpHelper.ok(data);
   }
 
   return response;

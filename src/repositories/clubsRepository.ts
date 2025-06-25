@@ -1,4 +1,6 @@
-const database = [
+import { ClubModel } from "../models/clubsModel";
+
+const database: ClubModel[] = [
   { id: 1, name: "Manchester City", country: "England" },
   { id: 2, name: "Real Madrid", country: "Spain" },
   { id: 3, name: "Chelsea", country: "England" },
@@ -33,6 +35,7 @@ const database = [
   { id: 32, name: "Ulsan HD", country: "South Korea" },
 ];
 
-export const findAllClubs = async () => {
+export const findAllClubs = async (): Promise<ClubModel[]> => {
   return database;
 };
+

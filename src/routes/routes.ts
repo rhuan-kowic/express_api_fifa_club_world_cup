@@ -4,11 +4,14 @@ import {
   findByIdClubController,
   insertClubController,
 } from "../controllers/clubsController";
+import { findAllPlayersController } from "../controllers/playersController";
 
 const router = Router();
 
 router.get("/clubs", findAllClubsController);
 router.get("/clubs/:id", findByIdClubController);
 router.post("/clubs", insertClubController);
+
+router.get("/players", findAllPlayersController);
 
 export default router;
